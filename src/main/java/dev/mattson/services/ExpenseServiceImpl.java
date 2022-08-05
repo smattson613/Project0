@@ -1,9 +1,9 @@
-package dev.mattson.services.expenseservice;
+package dev.mattson.services;
 
 import dev.mattson.daos.ExpenseDAO;
 import dev.mattson.entities.Expense;
 
-public class ExpenseServiceImpl implements ExpenseService{
+public class ExpenseServiceImpl implements ExpenseService {
 
     private ExpenseDAO expenseDAO;
 

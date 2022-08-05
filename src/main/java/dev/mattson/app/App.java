@@ -1,19 +1,21 @@
 package dev.mattson.app;
 
 import dev.mattson.daos.EmployeeDAOLocal;
+import dev.mattson.daos.EmployeeDAOPostgres;
 import dev.mattson.daos.ExpenseDAOLocal;
+import dev.mattson.daos.ExpenseDAOPostgres;
 import dev.mattson.handlers.employeehandlers.*;
 import dev.mattson.handlers.expensehandlers.*;
-import dev.mattson.services.employeeservice.EmployeeService;
-import dev.mattson.services.employeeservice.EmployeeServiceImpl;
-import dev.mattson.services.expenseservice.ExpenseService;
-import dev.mattson.services.expenseservice.ExpenseServiceImpl;
+import dev.mattson.services.EmployeeService;
+import dev.mattson.services.EmployeeServiceImpl;
+import dev.mattson.services.ExpenseService;
+import dev.mattson.services.ExpenseServiceImpl;
 import io.javalin.Javalin;
 
 public class App {
 
-    public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOLocal());
-    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOLocal());
+    public static EmployeeService employeeService = new EmployeeServiceImpl(new EmployeeDAOPostgres());
+    public static ExpenseService expenseService = new ExpenseServiceImpl(new ExpenseDAOPostgres());
 
     public static void main(String[] args) {
         //Employee Handlers

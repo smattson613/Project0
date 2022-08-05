@@ -1,4 +1,4 @@
-package dev.mattson.services.expenseservice;
+package dev.mattson.services;
 
 import dev.mattson.entities.Expense;
 

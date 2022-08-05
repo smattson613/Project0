@@ -10,7 +10,10 @@ public class Expense {
     private String expenseDescription;
     private ExpenseStatus expenseStatus;
 
-    //Constructor
+    //Constructors
+    public Expense(){
+    }
+
     public Expense(int id, int employeeId, double expense, ExpenseType expenseType, String expenseDescription, ExpenseStatus expenseStatus) {
         this.id = id;
         this.employeeId = employeeId;

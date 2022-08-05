@@ -10,7 +10,7 @@ public interface EmployeeDAO {
     Employee createEmployee(Employee employee);
 
     //Read
-    Employee getEmployeeById(int employee);
+    Employee getEmployeeById(int id);
     List<Employee> getAllEmployees();
 
     //Update an employee

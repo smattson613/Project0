@@ -1,4 +1,4 @@
-package dev.mattson.services.employeeservice;
+package dev.mattson.services;
 
 import dev.mattson.entities.Employee;
 
