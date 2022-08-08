@@ -26,9 +26,9 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             return employee;
 
         } catch (SQLException e) {
-
+            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -89,7 +89,7 @@ public class EmployeeDAOPostgres implements EmployeeDAO{
             preparedStatement.setInt(3, employee.getId());
 
             preparedStatement.executeUpdate();
-            return null;
+            return employee;
 
         } catch (SQLException e) {
             e.printStackTrace();

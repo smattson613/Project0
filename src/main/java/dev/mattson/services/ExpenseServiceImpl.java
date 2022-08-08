@@ -2,6 +2,11 @@ package dev.mattson.services;
 
 import dev.mattson.daos.ExpenseDAO;
 import dev.mattson.entities.Expense;
+import dev.mattson.entities.ExpenseStatus;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ExpenseServiceImpl implements ExpenseService {
 
@@ -33,5 +38,26 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Expense modifyExpense(Expense expense) {
         return this.expenseDAO.updateExpense(expense);
+    }
+
+    @Override
+    public List<Expense> getAllExpenses() {
+        return this.expenseDAO.getAllExpenses();
+    }
+
+    @Override
+    public List<Expense> getExpensesByExpenseStatus(String status) {
+        List<Expense> allExpenses = this.getAllExpenses();
+//        List<Expense> sortedExpenseList = new ArrayList();
+//
+//        for (Expense expense : allExpenses) {
+//            if(expense.getExpenseStatus().equals(status)) {
+//                sortedExpenseList.add(expense);
+//            }
+//        }
+
+        ExpenseStatus expenseStatus = ExpenseStatus.valueOf(status.toUpperCase());
+        List<Expense> sortedExpenseList = allExpenses.stream().filter(expense -> expense.getExpenseStatus().equals(expenseStatus)).collect(Collectors.toList());
+        return sortedExpenseList;
     }
 }

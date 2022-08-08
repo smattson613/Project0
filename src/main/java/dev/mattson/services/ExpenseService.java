@@ -2,6 +2,8 @@ package dev.mattson.services;
 
 import dev.mattson.entities.Expense;
 
+import java.util.List;
+
 public interface ExpenseService {
 
     Expense registerExpense(Expense expense);
@@ -11,4 +13,8 @@ public interface ExpenseService {
     boolean deleteExpense(int id);
 
     Expense modifyExpense(Expense expense);
+
+    List<Expense> getAllExpenses();
+
+    List<Expense> getExpensesByExpenseStatus(String status);
 }

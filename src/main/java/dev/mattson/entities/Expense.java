@@ -5,7 +5,7 @@ public class Expense {
     //variables
     private int id;
     private int employeeId;
-    private double expense;
+    private double expenseAmount;
     private ExpenseType expenseType;
     private String expenseDescription;
     private ExpenseStatus expenseStatus;
@@ -17,7 +17,7 @@ public class Expense {
     public Expense(int id, int employeeId, double expense, ExpenseType expenseType, String expenseDescription, ExpenseStatus expenseStatus) {
         this.id = id;
         this.employeeId = employeeId;
-        this.expense = expense;
+        this.expenseAmount = expense;
         this.expenseType = expenseType;
         this.expenseDescription = expenseDescription;
         this.expenseStatus = expenseStatus;
@@ -41,11 +41,11 @@ public class Expense {
     }
 
     public double getExpense() {
-        return expense;
+        return expenseAmount;
     }
 
     public void setExpense(double expense) {
-        this.expense = expense;
+        this.expenseAmount = expense;
     }
 
     public ExpenseType getExpenseType() {
@@ -78,7 +78,7 @@ public class Expense {
         return "Expense{" +
                 "id=" + id +
                 ", employeeId=" + employeeId +
-                ", expense=" + expense +
+                ", expense=" + expenseAmount +
                 ", expenseType=" + expenseType +
                 ", expenseDescription='" + expenseDescription + '\'' +
                 ", expenseStatus=" + expenseStatus +

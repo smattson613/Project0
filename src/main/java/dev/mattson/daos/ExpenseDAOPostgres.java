@@ -9,17 +9,17 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseDAOPostgres implements ExpenseDAO{
+public class ExpenseDAOPostgres implements ExpenseDAO {
     @Override
     public Expense createExpense(Expense expense) {
-        try(Connection conn = ConnectionUtil.createConnection()) {
-            String sql = "insert into employee values (default, ?, ?, ?, ?, ?";
+        try (Connection conn = ConnectionUtil.createConnection()) {
+            String sql = "insert into expense values (default, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, expense.getEmployeeId());
             preparedStatement.setDouble(2, expense.getExpense());
-            preparedStatement.setString(3, expense.getExpenseType());
+            preparedStatement.setString(3, expense.getExpenseType().name());
             preparedStatement.setString(4, expense.getExpenseDescription());
-            preparedStatement.setString(5, expense.getExpenseStatus());
+            preparedStatement.setString(5, expense.getExpenseStatus().name());
 
             preparedStatement.execute();
 
@@ -49,10 +49,10 @@ public class ExpenseDAOPostgres implements ExpenseDAO{
             Expense expense = new Expense();
             expense.setId(rs.getInt("id"));
             expense.setEmployeeId(rs.getInt("employeeId"));
-            expense.setExpense(rs.getDouble("expense"));
-            expense.setExpenseType(rs.getString("expenseType"));
+            expense.setExpense(rs.getDouble("expenseAmount"));
+            expense.setExpenseType(ExpenseType.valueOf(rs.getString("expenseType")));
             expense.setExpenseDescription(rs.getString("expenseDescription"));
-            expense.setExpenseStatus(rs.getString("expenseStatus"));
+            expense.setExpenseStatus(ExpenseStatus.valueOf(rs.getString("expenseStatus")));
 
             return expense;
 
@@ -75,10 +75,11 @@ public class ExpenseDAOPostgres implements ExpenseDAO{
                 Expense expense = new Expense();
                 expense.setId(rs.getInt("id"));
                 expense.setEmployeeId(rs.getInt("employeeId"));
-                expense.setExpense(rs.getDouble("expense"));
-                expense.setExpenseType(rs.getString("expenseType"));
+                expense.setExpense(rs.getDouble("expenseAmount"));
+                expense.setExpenseType(ExpenseType.valueOf(rs.getString("expenseType")));
                 expense.setExpenseDescription(rs.getString("expenseDescription"));
-                expense.setExpenseStatus(rs.getString("expenseStatus"));
+                expense.setExpenseStatus(ExpenseStatus.valueOf(rs.getString("expenseStatus")));
+                expenseList.add(expense);
             }
             return expenseList;
 
@@ -91,18 +92,18 @@ public class ExpenseDAOPostgres implements ExpenseDAO{
     @Override
     public Expense updateExpense(Expense expense) {
         try(Connection conn = ConnectionUtil.createConnection()) {
-            String sql = "update expense set employId, =?, expense = ?, expenseType = ?, expenseDescription = ?, expenseStatus = ?";
+            String sql = "update expense set employeeId = ?, expenseAmount = ?, expenseType = ?, expenseDescription = ?, expenseStatus = ? where id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
             preparedStatement.setInt(1, expense.getEmployeeId());
             preparedStatement.setDouble(2, expense.getExpense());
-            preparedStatement.setString(3, expense.getExpenseType());
+            preparedStatement.setString(3, expense.getExpenseType().name());
             preparedStatement.setString(4, expense.getExpenseDescription());
-            preparedStatement.setString(5, expense.getExpenseStatus());
+            preparedStatement.setString(5, expense.getExpenseStatus().name());
             preparedStatement.setInt(6, expense.getId());
 
             preparedStatement.executeUpdate();
-            return null;
+            return expense;
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -11,6 +11,7 @@ public class DeleteExpenseByIdHandler implements Handler {
         int id = Integer.parseInt(ctx.pathParam("id"));
         boolean result = App.expenseService.deleteExpense(id);
         if (result) {
+
             ctx.result("Deleted Expense");
         } else {
             ctx.status(404);
